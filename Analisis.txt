@@ -1,0 +1,16 @@
+Ejemplo de cadena de entrada: "XXY XYX XYX"
+
+1: Reemplazar espacios por un simbolo al momento de leer la cadena 
+2: Leer posicion en la que iniciara la maquina
+3: Desplegar menu
+	1 - Encontrar un simbolo
+		1.1 - El usuario ingresa el simbolo que quiere buscar
+	2 - Borrar todos los elementos de la cadena
+	3 - 
+4: "Creamos" la maquina compuesta y se habilita boton "Iniciar depuracion"
+5: "Casos de prueba" de que la maquina esta funcionando 
+		" XY XYX XYX"
+	Estado: 3 
+	Posicion: 5
+	Iteracion: 15
+	Operacion: Se reemplazo la X por Blanco..

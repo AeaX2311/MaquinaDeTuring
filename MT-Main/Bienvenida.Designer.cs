@@ -37,9 +37,9 @@ namespace MT_Main {
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(14, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(419, 220);
+            this.groupBox1.Size = new System.Drawing.Size(489, 254);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -47,7 +47,7 @@ namespace MT_Main {
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(63, 137);
+            this.label3.Location = new System.Drawing.Point(96, 155);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(294, 51);
             this.label3.TabIndex = 2;
@@ -59,7 +59,7 @@ namespace MT_Main {
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 63);
+            this.label2.Location = new System.Drawing.Point(44, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(405, 34);
             this.label2.TabIndex = 1;
@@ -71,7 +71,7 @@ namespace MT_Main {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(108, 29);
+            this.label1.Location = new System.Drawing.Point(143, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(193, 25);
             this.label1.TabIndex = 0;
@@ -80,9 +80,9 @@ namespace MT_Main {
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(151, 238);
+            this.btnIniciar.Location = new System.Drawing.Point(185, 274);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(132, 24);
+            this.btnIniciar.Size = new System.Drawing.Size(154, 28);
             this.btnIniciar.TabIndex = 1;
             this.btnIniciar.Text = "Iniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
@@ -90,11 +90,13 @@ namespace MT_Main {
             // 
             // Bienvenida
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 274);
+            this.ClientSize = new System.Drawing.Size(519, 316);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("MS Reference Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Bienvenida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maquina de Turing";
