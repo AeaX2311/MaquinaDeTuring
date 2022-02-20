@@ -25,6 +25,7 @@ namespace MT_Main {
         /// </summary>
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.alfabetoEnCeldas = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnGuardarCadenaEntrada = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@ namespace MT_Main {
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.alfabetoEnCeldas);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -50,6 +52,21 @@ namespace MT_Main {
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de entrada";
+            // 
+            // alfabetoEnCeldas
+            // 
+            this.alfabetoEnCeldas.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.alfabetoEnCeldas.HideSelection = false;
+            this.alfabetoEnCeldas.Location = new System.Drawing.Point(6, 141);
+            this.alfabetoEnCeldas.Name = "alfabetoEnCeldas";
+            this.alfabetoEnCeldas.OwnerDraw = true;
+            this.alfabetoEnCeldas.Size = new System.Drawing.Size(1297, 85);
+            this.alfabetoEnCeldas.TabIndex = 7;
+            this.alfabetoEnCeldas.TileSize = new System.Drawing.Size(60, 60);
+            this.alfabetoEnCeldas.UseCompatibleStateImageBehavior = false;
+            this.alfabetoEnCeldas.View = System.Windows.Forms.View.Tile;
+            this.alfabetoEnCeldas.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.alfabetoEnCeldas_DrawItem);
+            this.alfabetoEnCeldas.Click += new System.EventHandler(this.alfabetoEnCeldas_Click);
             // 
             // groupBox3
             // 
@@ -118,6 +135,7 @@ namespace MT_Main {
             this.txtCaracterAlfabeto.Name = "txtCaracterAlfabeto";
             this.txtCaracterAlfabeto.Size = new System.Drawing.Size(64, 27);
             this.txtCaracterAlfabeto.TabIndex = 1;
+            this.txtCaracterAlfabeto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaracterAlfabeto_KeyPress);
             // 
             // btnAgregarCaracterAlfabeto
             // 
@@ -157,6 +175,7 @@ namespace MT_Main {
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maquina de Turing";
@@ -182,5 +201,6 @@ namespace MT_Main {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCadenaEntrada;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ListView alfabetoEnCeldas;
     }
 }

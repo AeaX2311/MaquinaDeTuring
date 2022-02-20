@@ -17,6 +17,7 @@ namespace MT_Main {
         private void btnIniciar_Click(object sender, EventArgs e) {
             Form main = new Main();
             main.ShowDialog();
+            Dispose();
         }
     }
 }
