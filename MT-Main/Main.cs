@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,12 +9,21 @@ namespace MT_Main {
     /// Form principal
     /// </summary>
     public partial class Main : Form {
+
+        enum Operacion {
+            RECORRER_DERECHA,
+            RECORRER_IZQUIERDA
+        }
+
         /// <summary>
         /// Iniciar componentes principales
         /// </summary>
         /// 
         private string alfabeto = "";
         private const char ESPACIO_EN_BLANCO = 'Δ';
+
+        private object cabezalDeLaMaquina = null;
+
         public Main() {
             InitializeComponent();
         }
@@ -78,6 +83,8 @@ namespace MT_Main {
             foreach(char caracter in cadenaEntrada) {
                 alfabetoEnCeldas.Items.Add(caracter.ToString());
             }
+            alfabetoEnCeldas.Items[0].Selected = true;
+            cabezalDeLaMaquina = alfabetoEnCeldas.SelectedItems[0];
         }
 
         /// <summary>
@@ -104,13 +111,15 @@ namespace MT_Main {
         /// <param name="e"></param>
         private void alfabetoEnCeldas_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
-            Color textColor = SystemColors.HighlightText;
-            Color backGroundDeLaCelda = Color.FromArgb(255,90,51);
-            SolidBrush sb = new SolidBrush(backGroundDeLaCelda);
-            e.Graphics.FillRectangle(sb, e.Bounds); //Hacer el rectangulo
-            e.Graphics.DrawRectangle(Pens.DarkGray, e.Bounds);
+
+            SolidBrush colorNormalDeFondo = new SolidBrush(Color.FromArgb(255, 90, 51));
+            SolidBrush colorCuandoCabezalSeSelecciona = new SolidBrush(Color.FromArgb(36,255,109));
+            if (e.Item.Selected) {
+                e.Graphics.FillRectangle(colorCuandoCabezalSeSelecciona, e.Bounds);
+            } else e.Graphics.FillRectangle(colorNormalDeFondo, e.Bounds); 
+            e.Graphics.DrawRectangle(Pens.Red, e.Bounds);
             TextRenderer.DrawText(e.Graphics, e.Item.Text, alfabetoEnCeldas.Font, e.Bounds,
-                                  textColor, Color.Empty,
+                                   SystemColors.HighlightText, Color.Empty,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
@@ -131,9 +140,27 @@ namespace MT_Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void alfabetoEnCeldas_Click(object sender, EventArgs e) {
-            var cabezalSeleccionodo = alfabetoEnCeldas.SelectedItems[0];
-           // cabezalSeleccionodo.Bounds = Bounds. TODO
-           // cabezalSeleccionodo.BackColor = Color.Red;
+            var cabezalSeleccionado = alfabetoEnCeldas.SelectedItems[0];
+            cabezalDeLaMaquina = cabezalSeleccionado;
+        }
+
+        /// <summary>
+        /// Realizar una operacion en la cadena
+        /// </summary>
+        /// <param name="operacion"></param>
+        private async void operacionEnCadena(Operacion operacion) {
+            if(operacion == Operacion.RECORRER_DERECHA) {
+                var cabezal = alfabetoEnCeldas.SelectedItems[0];
+               for(int i=cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
+                    var item = alfabetoEnCeldas.Items[i];
+                    item.Selected = true;
+                    await Task.Delay(400);
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            operacionEnCadena(Operacion.RECORRER_DERECHA);
         }
     }
 }
