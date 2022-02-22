@@ -25,6 +25,7 @@ namespace MT_Main {
         /// </summary>
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblSelectedItemList = new System.Windows.Forms.Label();
             this.alfabetoEnCeldas = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnGuardarCadenaEntrada = new System.Windows.Forms.Button();
@@ -34,16 +35,29 @@ namespace MT_Main {
             this.label3 = new System.Windows.Forms.Label();
             this.txtCaracterAlfabeto = new System.Windows.Forms.TextBox();
             this.btnAgregarCaracterAlfabeto = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.listBoxAlfabeto = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEncenderMaquina = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.radEliminarElemento = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAuxiliar = new System.Windows.Forms.TextBox();
+            this.radEliminarTodosElementos = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnResetearPrograma = new System.Windows.Forms.Button();
+            this.nudCabezaFinal = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCabezaFinal)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblSelectedItemList);
             this.groupBox1.Controls.Add(this.alfabetoEnCeldas);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -54,11 +68,21 @@ namespace MT_Main {
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de entrada";
             // 
+            // lblSelectedItemList
+            // 
+            this.lblSelectedItemList.AutoSize = true;
+            this.lblSelectedItemList.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedItemList.Location = new System.Drawing.Point(1024, 132);
+            this.lblSelectedItemList.Name = "lblSelectedItemList";
+            this.lblSelectedItemList.Size = new System.Drawing.Size(213, 20);
+            this.lblSelectedItemList.TabIndex = 8;
+            this.lblSelectedItemList.Text = "Cabezal seleccionado:";
+            // 
             // alfabetoEnCeldas
             // 
             this.alfabetoEnCeldas.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.alfabetoEnCeldas.HideSelection = false;
-            this.alfabetoEnCeldas.Location = new System.Drawing.Point(6, 141);
+            this.alfabetoEnCeldas.Location = new System.Drawing.Point(6, 155);
             this.alfabetoEnCeldas.MultiSelect = false;
             this.alfabetoEnCeldas.Name = "alfabetoEnCeldas";
             this.alfabetoEnCeldas.OwnerDraw = true;
@@ -72,6 +96,7 @@ namespace MT_Main {
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnResetearPrograma);
             this.groupBox3.Controls.Add(this.btnGuardarCadenaEntrada);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtCadenaEntrada);
@@ -149,42 +174,143 @@ namespace MT_Main {
             this.btnAgregarCaracterAlfabeto.UseVisualStyleBackColor = true;
             this.btnAgregarCaracterAlfabeto.Click += new System.EventHandler(this.btnAgregarCaracterAlfabeto_Click);
             // 
+            // listBoxAlfabeto
+            // 
+            this.listBoxAlfabeto.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listBoxAlfabeto.FormattingEnabled = true;
+            this.listBoxAlfabeto.ItemHeight = 20;
+            this.listBoxAlfabeto.Location = new System.Drawing.Point(39, 26);
+            this.listBoxAlfabeto.Name = "listBoxAlfabeto";
+            this.listBoxAlfabeto.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBoxAlfabeto.Size = new System.Drawing.Size(23, 384);
+            this.listBoxAlfabeto.TabIndex = 2;
+            // 
+            // btnEncenderMaquina
+            // 
+            this.btnEncenderMaquina.Enabled = false;
+            this.btnEncenderMaquina.Location = new System.Drawing.Point(6, 356);
+            this.btnEncenderMaquina.Name = "btnEncenderMaquina";
+            this.btnEncenderMaquina.Size = new System.Drawing.Size(158, 54);
+            this.btnEncenderMaquina.TabIndex = 3;
+            this.btnEncenderMaquina.Text = "Encender maquina";
+            this.btnEncenderMaquina.UseVisualStyleBackColor = true;
+            this.btnEncenderMaquina.Click += new System.EventHandler(this.btnEncenderMaquina_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.nudCabezaFinal);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.radEliminarElemento);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.txtAuxiliar);
+            this.groupBox4.Controls.Add(this.radEliminarTodosElementos);
+            this.groupBox4.Controls.Add(this.btnEncenderMaquina);
+            this.groupBox4.Location = new System.Drawing.Point(121, 264);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(170, 416);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Acciones";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(28, 247);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(123, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Cabezal final:";
+            // 
+            // radEliminarElemento
+            // 
+            this.radEliminarElemento.AutoSize = true;
+            this.radEliminarElemento.Location = new System.Drawing.Point(0, 96);
+            this.radEliminarElemento.Name = "radEliminarElemento";
+            this.radEliminarElemento.Size = new System.Drawing.Size(176, 24);
+            this.radEliminarElemento.TabIndex = 7;
+            this.radEliminarElemento.TabStop = true;
+            this.radEliminarElemento.Text = "Eliminar elemento";
+            this.radEliminarElemento.UseVisualStyleBackColor = true;
+            this.radEliminarElemento.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 261);
+            this.label2.Location = new System.Drawing.Point(38, 300);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Mi alfabeto:";
+            this.label2.Size = new System.Drawing.Size(93, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Elemento:";
             // 
-            // listBoxAlfabeto
+            // txtAuxiliar
             // 
-            this.listBoxAlfabeto.FormattingEnabled = true;
-            this.listBoxAlfabeto.ItemHeight = 20;
-            this.listBoxAlfabeto.Location = new System.Drawing.Point(12, 284);
-            this.listBoxAlfabeto.Name = "listBoxAlfabeto";
-            this.listBoxAlfabeto.Size = new System.Drawing.Size(108, 404);
-            this.listBoxAlfabeto.TabIndex = 2;
+            this.txtAuxiliar.Enabled = false;
+            this.txtAuxiliar.Location = new System.Drawing.Point(6, 323);
+            this.txtAuxiliar.Name = "txtAuxiliar";
+            this.txtAuxiliar.Size = new System.Drawing.Size(158, 27);
+            this.txtAuxiliar.TabIndex = 5;
             // 
-            // button1
+            // radEliminarTodosElementos
             // 
-            this.button1.Location = new System.Drawing.Point(210, 284);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.radEliminarTodosElementos.Checked = true;
+            this.radEliminarTodosElementos.Location = new System.Drawing.Point(6, 26);
+            this.radEliminarTodosElementos.Name = "radEliminarTodosElementos";
+            this.radEliminarTodosElementos.Size = new System.Drawing.Size(158, 64);
+            this.radEliminarTodosElementos.TabIndex = 4;
+            this.radEliminarTodosElementos.TabStop = true;
+            this.radEliminarTodosElementos.Text = "Eliminar todos los elementos a la derecha";
+            this.radEliminarTodosElementos.UseVisualStyleBackColor = true;
+            this.radEliminarTodosElementos.CheckedChanged += new System.EventHandler(this.radEliminarTodosElementos_CheckedChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.listBoxAlfabeto);
+            this.groupBox5.Location = new System.Drawing.Point(12, 264);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(103, 416);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Alfabeto";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Location = new System.Drawing.Point(297, 264);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(1024, 416);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Maquina de Turing";
+            // 
+            // btnResetearPrograma
+            // 
+            this.btnResetearPrograma.Location = new System.Drawing.Point(600, 56);
+            this.btnResetearPrograma.Name = "btnResetearPrograma";
+            this.btnResetearPrograma.Size = new System.Drawing.Size(250, 28);
+            this.btnResetearPrograma.TabIndex = 7;
+            this.btnResetearPrograma.Text = "Resetear cadena";
+            this.btnResetearPrograma.UseVisualStyleBackColor = true;
+            this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
+            // 
+            // nudCabezaFinal
+            // 
+            this.nudCabezaFinal.Location = new System.Drawing.Point(6, 270);
+            this.nudCabezaFinal.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCabezaFinal.Name = "nudCabezaFinal";
+            this.nudCabezaFinal.Size = new System.Drawing.Size(158, 27);
+            this.nudCabezaFinal.TabIndex = 10;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 692);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBoxAlfabeto);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -193,12 +319,16 @@ namespace MT_Main {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maquina de Turing";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudCabezaFinal)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -207,7 +337,6 @@ namespace MT_Main {
         private System.Windows.Forms.Button btnAgregarCaracterAlfabeto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCaracterAlfabeto;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxAlfabeto;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnGuardarCadenaEntrada;
@@ -215,6 +344,17 @@ namespace MT_Main {
         private System.Windows.Forms.TextBox txtCadenaEntrada;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView alfabetoEnCeldas;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEncenderMaquina;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radEliminarTodosElementos;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lblSelectedItemList;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton radEliminarElemento;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtAuxiliar;
+        private System.Windows.Forms.Button btnResetearPrograma;
+        private System.Windows.Forms.NumericUpDown nudCabezaFinal;
     }
 }

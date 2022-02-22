@@ -11,8 +11,8 @@ namespace MT_Main {
     public partial class Main : Form {
 
         enum Operacion {
-            RECORRER_DERECHA,
-            RECORRER_IZQUIERDA
+            ELIMINAR_TODOS,
+            ELIMINAR_ELEMENTO
         }
 
         /// <summary>
@@ -21,8 +21,9 @@ namespace MT_Main {
         /// 
         private string alfabeto = "";
         private const char ESPACIO_EN_BLANCO = 'Δ';
+        private ListViewItem cabezalDeLaMaquina = null;
+        private char[] cadenaEntrada;
 
-        private object cabezalDeLaMaquina = null;
 
         public Main() {
             InitializeComponent();
@@ -66,12 +67,12 @@ namespace MT_Main {
                 return;
             }
 
-            string cadenaEntrada = txtCadenaEntrada.Text;
+            cadenaEntrada = txtCadenaEntrada.Text.ToCharArray();
             //no permitir modificar alfabeto
             //guardar cadena, no modificarla
-            //mostrar cadena por espacios, en cuadricula
-            //
-            guardarCadenaEntradaEnCeldas(cadenaEntrada);
+            guardarCadenaEntradaEnCeldas();
+            btnEncenderMaquina.Enabled = true;
+            btnAgregarCaracterAlfabeto.Enabled = false;
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace MT_Main {
         /// Lo divide x celdas
         /// </summary>
         /// <param name="cadenaEntrada">Cadena de entrada a dividr en el listView</param>
-        private void guardarCadenaEntradaEnCeldas(string cadenaEntrada) {
+        private void guardarCadenaEntradaEnCeldas() {
             foreach(char caracter in cadenaEntrada) {
                 alfabetoEnCeldas.Items.Add(caracter.ToString());
             }
@@ -142,6 +143,7 @@ namespace MT_Main {
         private void alfabetoEnCeldas_Click(object sender, EventArgs e) {
             var cabezalSeleccionado = alfabetoEnCeldas.SelectedItems[0];
             cabezalDeLaMaquina = cabezalSeleccionado;
+            lblSelectedItemList.Text = "Cabezal seleccionado: " + cabezalDeLaMaquina.Index;
         }
 
         /// <summary>
@@ -149,18 +151,90 @@ namespace MT_Main {
         /// </summary>
         /// <param name="operacion"></param>
         private async void operacionEnCadena(Operacion operacion) {
-            if(operacion == Operacion.RECORRER_DERECHA) {
-                var cabezal = alfabetoEnCeldas.SelectedItems[0];
-               for(int i=cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
+            ListViewItem cabezal;
+            try {
+                cabezal = alfabetoEnCeldas.SelectedItems[0];
+            }catch { //No deberia ocurrir nunca
+                MessageBox.Show("No se encontro una cadena con la cual interactuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(operacion == Operacion.ELIMINAR_TODOS) {
+                //Recorre los elementos de la posicion seleccionada hasta el ultimo
+                for(int i = cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
+                    cadenaEntrada[i] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
+                    var item = alfabetoEnCeldas.Items[i];
+                    item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
+                    item.Selected = true; //Cambio de color  
+                    await Task.Delay(800); //Delay
+                }
+            } else if (operacion == Operacion.ELIMINAR_ELEMENTO) {
+                int i;
+                for(i = cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
                     var item = alfabetoEnCeldas.Items[i];
                     item.Selected = true;
-                    await Task.Delay(400);
+                    await Task.Delay(800);
+                    
+                    if(cadenaEntrada[i] == txtAuxiliar.Text.ElementAt(0)) { //Es el elemento que estoy buscando?
+                        cadenaEntrada[i] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
+                        item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
+                        i--; //Decrementa en uno para que aparezca en la posicion anterior
+                        break;
+                    }
+                }
+
+                for(; i >= 0; i--) {
+                    var item = alfabetoEnCeldas.Items[i];
+                    item.Selected = true;
+                    await Task.Delay(800);
+                    
+                    if(i == int.Parse(nudCabezaFinal.Text)) break;//Llegue a la posicion que quiero terminar?
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            operacionEnCadena(Operacion.RECORRER_DERECHA);
+        private void btnEncenderMaquina_Click(object sender, EventArgs e) {
+            if(radEliminarTodosElementos.Checked) {
+                operacionEnCadena(Operacion.ELIMINAR_TODOS);
+            } else if(radEliminarElemento.Checked) {
+                if(string.IsNullOrWhiteSpace(txtAuxiliar.Text)) {
+                    MessageBox.Show("Favor de introducir un elemento para eliminar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAuxiliar.Focus();
+                    return;
+                }
+                if(string.IsNullOrWhiteSpace(nudCabezaFinal.Text)) {
+                    MessageBox.Show("Favor de introducir el cabezal en el que terminara la maquina.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    nudCabezaFinal.Focus();
+                    return;
+                }
+                if(!alfabeto.Contains(txtAuxiliar.Text)) {
+                    MessageBox.Show("El elemento que se quiere eliminar no se encuentra en el alfabeto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAuxiliar.Focus();
+                    return;
+                }
+
+                operacionEnCadena(Operacion.ELIMINAR_ELEMENTO);
+            }
+
+            //Imprimir diagrama
+           // MessageBox.Show("Operacion realizada correctamente.", "¡Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void radEliminarTodosElementos_CheckedChanged(object sender, EventArgs e) {
+            habilitarTextBoxesAuxiliares(false);
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e) {
+            habilitarTextBoxesAuxiliares(true);
+        }
+
+        private void habilitarTextBoxesAuxiliares(bool valor) {
+            txtAuxiliar.Enabled = valor;
+            nudCabezaFinal.Enabled = valor;
+        }
+
+        private void btnResetearPrograma_Click(object sender, EventArgs e) {
+            cadenaEntrada = null;
+            alfabetoEnCeldas.Items.Clear();
         }
     }
 }
