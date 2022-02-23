@@ -14,3 +14,24 @@ Ejemplo de cadena de entrada: "XXY XYX XYX"
 	Posicion: 5
 	Iteracion: 15
 	Operacion: Se reemplazo la X por Blanco..
+
+
+	_XXYXXX_XX_
+	_X#YYYYYY_
+-CABEZAL INICIAL 2, "guardar", reemplazar todo, regresar a cabezal inicial
+
+- Mover derecha hasta
+	-input: simbolo
+- Mover izquierda hasta
+	-input simbolo
+- Sobreescribir
+- reemplazar simbolo
+	-input simbolo
+-eliminar 
+
+
+Mover a la derecha hasta
+Mover a la izquierda hasta
+Sobreescribir
+Reemplazar por simbolo
+Eliminar simbolo

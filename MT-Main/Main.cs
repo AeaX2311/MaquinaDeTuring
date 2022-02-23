@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,7 @@ namespace MT_Main {
     /// </summary>
     public partial class Main : Form {
 
-        enum Operacion {
-            ELIMINAR_TODOS,
-            ELIMINAR_ELEMENTO
-        }
+
 
         /// <summary>
         /// Iniciar componentes principales
@@ -23,14 +21,18 @@ namespace MT_Main {
         private const char ESPACIO_EN_BLANCO = 'Δ';
         private ListViewItem cabezalDeLaMaquina = null;
         private char[] cadenaEntrada;
-
+        private List<Operacion> operaciones = new List<Operacion>();
+        private int delay = 100;
 
         public Main() {
             InitializeComponent();
+            cboMovimientos.DataSource = Enum.GetValues(typeof(Movimientos));
+            cboAcciones.DataSource = Enum.GetValues(typeof(Acciones));
+            clearMovs();
         }
 
         private void btnAgregarCaracterAlfabeto_Click(object sender, EventArgs e) {
-            onAgregarCaracterAlfabeto();
+            onAgregarCaracterAlfabeto();        
         }
 
         /// <summary>
@@ -146,79 +148,6 @@ namespace MT_Main {
             lblSelectedItemList.Text = "Cabezal seleccionado: " + cabezalDeLaMaquina.Index;
         }
 
-        /// <summary>
-        /// Realizar una operacion en la cadena
-        /// </summary>
-        /// <param name="operacion"></param>
-        private async void operacionEnCadena(Operacion operacion) {
-            ListViewItem cabezal;
-            try {
-                cabezal = alfabetoEnCeldas.SelectedItems[0];
-            }catch { //No deberia ocurrir nunca
-                MessageBox.Show("No se encontro una cadena con la cual interactuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if(operacion == Operacion.ELIMINAR_TODOS) {
-                //Recorre los elementos de la posicion seleccionada hasta el ultimo
-                for(int i = cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
-                    cadenaEntrada[i] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
-                    var item = alfabetoEnCeldas.Items[i];
-                    item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
-                    item.Selected = true; //Cambio de color  
-                    await Task.Delay(800); //Delay
-                }
-            } else if (operacion == Operacion.ELIMINAR_ELEMENTO) {
-                int i;
-                for(i = cabezal.Index; i < alfabetoEnCeldas.Items.Count; i++) {
-                    var item = alfabetoEnCeldas.Items[i];
-                    item.Selected = true;
-                    await Task.Delay(800);
-                    
-                    if(cadenaEntrada[i] == txtAuxiliar.Text.ElementAt(0)) { //Es el elemento que estoy buscando?
-                        cadenaEntrada[i] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
-                        item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
-                        i--; //Decrementa en uno para que aparezca en la posicion anterior
-                        break;
-                    }
-                }
-
-                for(; i >= 0; i--) {
-                    var item = alfabetoEnCeldas.Items[i];
-                    item.Selected = true;
-                    await Task.Delay(800);
-                    
-                    if(i == int.Parse(nudCabezaFinal.Text)) break;//Llegue a la posicion que quiero terminar?
-                }
-            }
-        }
-
-        private void btnEncenderMaquina_Click(object sender, EventArgs e) {
-            if(radEliminarTodosElementos.Checked) {
-                operacionEnCadena(Operacion.ELIMINAR_TODOS);
-            } else if(radEliminarElemento.Checked) {
-                if(string.IsNullOrWhiteSpace(txtAuxiliar.Text)) {
-                    MessageBox.Show("Favor de introducir un elemento para eliminar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtAuxiliar.Focus();
-                    return;
-                }
-                if(string.IsNullOrWhiteSpace(nudCabezaFinal.Text)) {
-                    MessageBox.Show("Favor de introducir el cabezal en el que terminara la maquina.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    nudCabezaFinal.Focus();
-                    return;
-                }
-                if(!alfabeto.Contains(txtAuxiliar.Text)) {
-                    MessageBox.Show("El elemento que se quiere eliminar no se encuentra en el alfabeto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtAuxiliar.Focus();
-                    return;
-                }
-
-                operacionEnCadena(Operacion.ELIMINAR_ELEMENTO);
-            }
-
-            //Imprimir diagrama
-           // MessageBox.Show("Operacion realizada correctamente.", "¡Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void radEliminarTodosElementos_CheckedChanged(object sender, EventArgs e) {
             habilitarTextBoxesAuxiliares(false);
         }
@@ -228,13 +157,163 @@ namespace MT_Main {
         }
 
         private void habilitarTextBoxesAuxiliares(bool valor) {
-            txtAuxiliar.Enabled = valor;
-            nudCabezaFinal.Enabled = valor;
+            txtCaracterAuxiliar.Enabled = valor;
         }
 
         private void btnResetearPrograma_Click(object sender, EventArgs e) {
             cadenaEntrada = null;
             alfabetoEnCeldas.Items.Clear();
         }
+
+        private void btnAgregarAccion_Click(object sender, EventArgs e) {
+            Operacion nuevaOperacion = new Operacion((Movimientos) cboMovimientos.SelectedItem, (Acciones) cboAcciones.SelectedItem);
+            
+            if(string.IsNullOrWhiteSpace(txtCaracterAuxiliar.Text)) {
+                MessageBox.Show("Favor de introducir un caracter para detener los movimientos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCaracterAuxiliar.Focus();
+                return;
+            }
+            if(!alfabeto.Contains(txtCaracterAuxiliar.Text)) {
+                MessageBox.Show("El elemento que se quiere utilizar en movimientos no se encuentra en el alfabeto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCaracterAuxiliar.Focus();
+                return;
+            }
+            nuevaOperacion.CaracterMovimiento = txtCaracterAuxiliar.Text.ElementAt(0);
+
+            if(nuevaOperacion.Accion == Acciones.REEMPLAZAR_SIMBOLO) {
+                if(string.IsNullOrWhiteSpace(txtCaracterReemplazar.Text)) {
+                    MessageBox.Show("Favor de introducir un caracter para reemplazar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCaracterReemplazar.Focus();
+                    return;
+                }
+                if(!alfabeto.Contains(txtCaracterReemplazar.Text)) {
+                    MessageBox.Show("El elemento que se quiere utilizar en reemplazo no se encuentra en el alfabeto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCaracterReemplazar.Focus();
+                    return;
+                }
+
+                nuevaOperacion.CaracterAccion = txtCaracterReemplazar.Text.ElementAt(0);
+            }
+
+            nuevaOperacion.IsNegacion = chkNegacion.Checked;
+            operaciones.Add(nuevaOperacion);
+
+            clearMovs();
+            btnGuardarCadenaEntrada.Enabled = false;
+            btnEncenderMaquina.Enabled = true;
+        }
+
+        private async void btnEncenderMaquina_Click(object sender, EventArgs e) {
+            delay = (int) delayControl.Value;
+            bool x = await ejecutar();
+            if(x) {
+                MessageBox.Show("Cadena aceptada.", "Exito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                MessageBox.Show("La cadena no fue aceptada.", "Ocurrio un error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private async Task<bool>  ejecutar() {
+            ListViewItem cabezal;
+            try {
+                cabezal = alfabetoEnCeldas.SelectedItems[0];
+            } catch { //No deberia ocurrir nunca
+                MessageBox.Show("No se encontro una cadena con la cual interactuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return await Task.FromResult(false);
+            }
+        
+            int iterador = cabezal.Index;
+
+            foreach(Operacion operacion in operaciones) {
+                switch(operacion.Movimiento) {
+                    case Movimientos.MOVER_DERECHA_HASTA:
+                        iterador++;
+                        while(true) {
+                            if(iterador == cadenaEntrada.Length) {
+                                MessageBox.Show("Ocurrio un problema en la parada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return await Task.FromResult(false);
+                            }
+
+                            if(operacion.IsNegacion ? cadenaEntrada[iterador] != operacion.CaracterMovimiento : cadenaEntrada[iterador] == operacion.CaracterMovimiento) { //Es el elemento que estoy buscando?
+                                break;
+                            }
+
+                            var item = alfabetoEnCeldas.Items[iterador];
+                            try {
+                                alfabetoEnCeldas.Items[iterador + 1].Selected = true; //Cambio visual
+                            } catch {
+                                MessageBox.Show("Ocurrio un problema en la parada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return await Task.FromResult(false);
+                            }
+
+                            switch(operacion.Accion) {
+                                case Acciones.ELIMINAR_CARACTER:
+                                    cadenaEntrada[iterador] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
+                                    item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
+                                    break;
+                                case Acciones.REEMPLAZAR_SIMBOLO:
+                                    cadenaEntrada[iterador] = operacion.CaracterAccion; //Cambia el valor en la cadena real
+                                    item.Text = operacion.CaracterAccion.ToString(); //Cambia el valor visible en las celdas
+                                    break;
+                                case Acciones.SOBREESCRIBIR:
+                                    break;
+                            }
+                          
+                            await Task.Delay(delay); 
+                            iterador++;
+                        }
+
+                    break;
+                    case Movimientos.MOVER_IZQUIERDA_HASTA:
+                        iterador--;
+                        while(true) {
+                            if(iterador == -1) {
+                                MessageBox.Show("Ocurrio una terminacion anormal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return await Task.FromResult(false);
+                            }
+                            if(operacion.IsNegacion ? cadenaEntrada[iterador] != operacion.CaracterMovimiento : cadenaEntrada[iterador] == operacion.CaracterMovimiento) { //Es el elemento que estoy buscando?
+                                break;
+                            }
+
+                            var item = alfabetoEnCeldas.Items[iterador];
+                            try {
+                                alfabetoEnCeldas.Items[iterador - 1].Selected = true; //Cambio visual
+                            } catch {
+                                MessageBox.Show("Ocurrio una terminacion anormal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return await Task.FromResult(false);
+                            }
+
+                            switch(operacion.Accion) {
+                                case Acciones.ELIMINAR_CARACTER:
+                                    cadenaEntrada[iterador] = ESPACIO_EN_BLANCO; //Cambia el valor en la cadena real
+                                    item.Text = ESPACIO_EN_BLANCO.ToString(); //Cambia el valor visible en las celdas
+                                    break;
+                                case Acciones.REEMPLAZAR_SIMBOLO:
+                                    cadenaEntrada[iterador] = operacion.CaracterAccion; //Cambia el valor en la cadena real
+                                    item.Text = operacion.CaracterAccion.ToString(); //Cambia el valor visible en las celdas
+                                    break;
+                                case Acciones.SOBREESCRIBIR:
+                                    break;
+                            }
+
+                            await Task.Delay(delay);
+                            iterador--;
+                        }
+
+                     break;                    
+                }
+            }
+
+            return await Task.FromResult(true);
+        }
+
+        private void clearMovs() {
+            cboAcciones.SelectedIndex = 0;
+            cboMovimientos.SelectedIndex = 0;
+            txtCaracterAuxiliar.Text = "";
+            txtCaracterReemplazar.Text = "";
+            chkNegacion.Checked = false;
+        }
+    
     }
 }

@@ -28,6 +28,7 @@ namespace MT_Main {
             this.lblSelectedItemList = new System.Windows.Forms.Label();
             this.alfabetoEnCeldas = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnResetearPrograma = new System.Windows.Forms.Button();
             this.btnGuardarCadenaEntrada = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCadenaEntrada = new System.Windows.Forms.TextBox();
@@ -38,21 +39,30 @@ namespace MT_Main {
             this.listBoxAlfabeto = new System.Windows.Forms.ListBox();
             this.btnEncenderMaquina = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.radEliminarElemento = new System.Windows.Forms.RadioButton();
+            this.btnAgregarAccion = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboMovimientos = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtAuxiliar = new System.Windows.Forms.TextBox();
-            this.radEliminarTodosElementos = new System.Windows.Forms.RadioButton();
+            this.txtCaracterAuxiliar = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnResetearPrograma = new System.Windows.Forms.Button();
-            this.nudCabezaFinal = new System.Windows.Forms.NumericUpDown();
+            this.lbxMovimientosPorPasos = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvAcciones = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboAcciones = new System.Windows.Forms.ComboBox();
+            this.chkNegacion = new System.Windows.Forms.CheckBox();
+            this.txtCaracterReemplazar = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.delayControl = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCabezaFinal)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAcciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -72,7 +82,7 @@ namespace MT_Main {
             // 
             this.lblSelectedItemList.AutoSize = true;
             this.lblSelectedItemList.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedItemList.Location = new System.Drawing.Point(1024, 132);
+            this.lblSelectedItemList.Location = new System.Drawing.Point(1084, 132);
             this.lblSelectedItemList.Name = "lblSelectedItemList";
             this.lblSelectedItemList.Size = new System.Drawing.Size(213, 20);
             this.lblSelectedItemList.TabIndex = 8;
@@ -106,6 +116,16 @@ namespace MT_Main {
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cadena de entrada";
+            // 
+            // btnResetearPrograma
+            // 
+            this.btnResetearPrograma.Location = new System.Drawing.Point(600, 56);
+            this.btnResetearPrograma.Name = "btnResetearPrograma";
+            this.btnResetearPrograma.Size = new System.Drawing.Size(250, 28);
+            this.btnResetearPrograma.TabIndex = 7;
+            this.btnResetearPrograma.Text = "Resetear cadena";
+            this.btnResetearPrograma.UseVisualStyleBackColor = true;
+            this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
             // 
             // btnGuardarCadenaEntrada
             // 
@@ -179,7 +199,7 @@ namespace MT_Main {
             this.listBoxAlfabeto.BackColor = System.Drawing.SystemColors.ControlLight;
             this.listBoxAlfabeto.FormattingEnabled = true;
             this.listBoxAlfabeto.ItemHeight = 20;
-            this.listBoxAlfabeto.Location = new System.Drawing.Point(39, 26);
+            this.listBoxAlfabeto.Location = new System.Drawing.Point(34, 26);
             this.listBoxAlfabeto.Name = "listBoxAlfabeto";
             this.listBoxAlfabeto.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBoxAlfabeto.Size = new System.Drawing.Size(23, 384);
@@ -188,9 +208,9 @@ namespace MT_Main {
             // btnEncenderMaquina
             // 
             this.btnEncenderMaquina.Enabled = false;
-            this.btnEncenderMaquina.Location = new System.Drawing.Point(6, 356);
+            this.btnEncenderMaquina.Location = new System.Drawing.Point(0, 262);
             this.btnEncenderMaquina.Name = "btnEncenderMaquina";
-            this.btnEncenderMaquina.Size = new System.Drawing.Size(158, 54);
+            this.btnEncenderMaquina.Size = new System.Drawing.Size(331, 54);
             this.btnEncenderMaquina.TabIndex = 3;
             this.btnEncenderMaquina.Text = "Encender maquina";
             this.btnEncenderMaquina.UseVisualStyleBackColor = true;
@@ -198,116 +218,195 @@ namespace MT_Main {
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.nudCabezaFinal);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.radEliminarElemento);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.txtCaracterReemplazar);
+            this.groupBox4.Controls.Add(this.chkNegacion);
+            this.groupBox4.Controls.Add(this.cboAcciones);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.btnAgregarAccion);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.cboMovimientos);
             this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.txtAuxiliar);
-            this.groupBox4.Controls.Add(this.radEliminarTodosElementos);
+            this.groupBox4.Controls.Add(this.txtCaracterAuxiliar);
             this.groupBox4.Controls.Add(this.btnEncenderMaquina);
             this.groupBox4.Location = new System.Drawing.Point(121, 264);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(170, 416);
+            this.groupBox4.Size = new System.Drawing.Size(343, 333);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Acciones";
+            this.groupBox4.Text = "Procesos";
             // 
-            // label4
+            // btnAgregarAccion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 247);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Cabezal final:";
+            this.btnAgregarAccion.Location = new System.Drawing.Point(0, 225);
+            this.btnAgregarAccion.Name = "btnAgregarAccion";
+            this.btnAgregarAccion.Size = new System.Drawing.Size(331, 31);
+            this.btnAgregarAccion.TabIndex = 13;
+            this.btnAgregarAccion.Text = "Agregar";
+            this.btnAgregarAccion.UseVisualStyleBackColor = true;
+            this.btnAgregarAccion.Click += new System.EventHandler(this.btnAgregarAccion_Click);
             // 
-            // radEliminarElemento
+            // label5
             // 
-            this.radEliminarElemento.AutoSize = true;
-            this.radEliminarElemento.Location = new System.Drawing.Point(0, 96);
-            this.radEliminarElemento.Name = "radEliminarElemento";
-            this.radEliminarElemento.Size = new System.Drawing.Size(176, 24);
-            this.radEliminarElemento.TabIndex = 7;
-            this.radEliminarElemento.TabStop = true;
-            this.radEliminarElemento.Text = "Eliminar elemento";
-            this.radEliminarElemento.UseVisualStyleBackColor = true;
-            this.radEliminarElemento.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(110, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Movimiento:";
+            // 
+            // cboMovimientos
+            // 
+            this.cboMovimientos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMovimientos.FormattingEnabled = true;
+            this.cboMovimientos.Location = new System.Drawing.Point(122, 26);
+            this.cboMovimientos.Name = "cboMovimientos";
+            this.cboMovimientos.Size = new System.Drawing.Size(215, 28);
+            this.cboMovimientos.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 300);
+            this.label2.Location = new System.Drawing.Point(6, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 20);
+            this.label2.Size = new System.Drawing.Size(196, 20);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Elemento:";
+            this.label2.Text = "Hasta que encuentres:";
             // 
-            // txtAuxiliar
+            // txtCaracterAuxiliar
             // 
-            this.txtAuxiliar.Enabled = false;
-            this.txtAuxiliar.Location = new System.Drawing.Point(6, 323);
-            this.txtAuxiliar.Name = "txtAuxiliar";
-            this.txtAuxiliar.Size = new System.Drawing.Size(158, 27);
-            this.txtAuxiliar.TabIndex = 5;
-            // 
-            // radEliminarTodosElementos
-            // 
-            this.radEliminarTodosElementos.Checked = true;
-            this.radEliminarTodosElementos.Location = new System.Drawing.Point(6, 26);
-            this.radEliminarTodosElementos.Name = "radEliminarTodosElementos";
-            this.radEliminarTodosElementos.Size = new System.Drawing.Size(158, 64);
-            this.radEliminarTodosElementos.TabIndex = 4;
-            this.radEliminarTodosElementos.TabStop = true;
-            this.radEliminarTodosElementos.Text = "Eliminar todos los elementos a la derecha";
-            this.radEliminarTodosElementos.UseVisualStyleBackColor = true;
-            this.radEliminarTodosElementos.CheckedChanged += new System.EventHandler(this.radEliminarTodosElementos_CheckedChanged);
+            this.txtCaracterAuxiliar.Location = new System.Drawing.Point(208, 60);
+            this.txtCaracterAuxiliar.MaxLength = 1;
+            this.txtCaracterAuxiliar.Name = "txtCaracterAuxiliar";
+            this.txtCaracterAuxiliar.Size = new System.Drawing.Size(129, 27);
+            this.txtCaracterAuxiliar.TabIndex = 5;
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.listBoxAlfabeto);
             this.groupBox5.Location = new System.Drawing.Point(12, 264);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(103, 416);
+            this.groupBox5.Size = new System.Drawing.Size(94, 416);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Alfabeto";
             // 
             // groupBox6
             // 
-            this.groupBox6.Location = new System.Drawing.Point(297, 264);
+            this.groupBox6.Controls.Add(this.dgvAcciones);
+            this.groupBox6.Location = new System.Drawing.Point(562, 414);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1024, 416);
+            this.groupBox6.Size = new System.Drawing.Size(343, 141);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Maquina de Turing";
+            this.groupBox6.Text = "Acciones";
             // 
-            // btnResetearPrograma
+            // lbxMovimientosPorPasos
             // 
-            this.btnResetearPrograma.Location = new System.Drawing.Point(600, 56);
-            this.btnResetearPrograma.Name = "btnResetearPrograma";
-            this.btnResetearPrograma.Size = new System.Drawing.Size(250, 28);
-            this.btnResetearPrograma.TabIndex = 7;
-            this.btnResetearPrograma.Text = "Resetear cadena";
-            this.btnResetearPrograma.UseVisualStyleBackColor = true;
-            this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
+            this.lbxMovimientosPorPasos.FormattingEnabled = true;
+            this.lbxMovimientosPorPasos.ItemHeight = 20;
+            this.lbxMovimientosPorPasos.Location = new System.Drawing.Point(931, 313);
+            this.lbxMovimientosPorPasos.Name = "lbxMovimientosPorPasos";
+            this.lbxMovimientosPorPasos.Size = new System.Drawing.Size(390, 364);
+            this.lbxMovimientosPorPasos.TabIndex = 7;
             // 
-            // nudCabezaFinal
+            // label4
             // 
-            this.nudCabezaFinal.Location = new System.Drawing.Point(6, 270);
-            this.nudCabezaFinal.Maximum = new decimal(new int[] {
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(484, 281);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(204, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Movimientos por pasos.";
+            // 
+            // dgvAcciones
+            // 
+            this.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAcciones.Location = new System.Drawing.Point(0, 54);
+            this.dgvAcciones.Name = "dgvAcciones";
+            this.dgvAcciones.Size = new System.Drawing.Size(331, 129);
+            this.dgvAcciones.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 96);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 20);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Accion:";
+            // 
+            // cboAcciones
+            // 
+            this.cboAcciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAcciones.FormattingEnabled = true;
+            this.cboAcciones.Location = new System.Drawing.Point(96, 96);
+            this.cboAcciones.Name = "cboAcciones";
+            this.cboAcciones.Size = new System.Drawing.Size(241, 28);
+            this.cboAcciones.TabIndex = 15;
+            // 
+            // chkNegacion
+            // 
+            this.chkNegacion.AutoSize = true;
+            this.chkNegacion.Location = new System.Drawing.Point(26, 181);
+            this.chkNegacion.Name = "chkNegacion";
+            this.chkNegacion.Size = new System.Drawing.Size(103, 24);
+            this.chkNegacion.TabIndex = 16;
+            this.chkNegacion.Text = "Negacion";
+            this.chkNegacion.UseVisualStyleBackColor = true;
+            // 
+            // txtCaracterReemplazar
+            // 
+            this.txtCaracterReemplazar.Location = new System.Drawing.Point(208, 130);
+            this.txtCaracterReemplazar.MaxLength = 1;
+            this.txtCaracterReemplazar.Name = "txtCaracterReemplazar";
+            this.txtCaracterReemplazar.Size = new System.Drawing.Size(129, 27);
+            this.txtCaracterReemplazar.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(49, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(153, 20);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Reemplazalo por:";
+            // 
+            // delayControl
+            // 
+            this.delayControl.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.delayControl.Location = new System.Drawing.Point(488, 630);
+            this.delayControl.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.nudCabezaFinal.Name = "nudCabezaFinal";
-            this.nudCabezaFinal.Size = new System.Drawing.Size(158, 27);
-            this.nudCabezaFinal.TabIndex = 10;
+            this.delayControl.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.delayControl.Name = "delayControl";
+            this.delayControl.Size = new System.Drawing.Size(120, 27);
+            this.delayControl.TabIndex = 10;
+            this.delayControl.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 692);
+            this.Controls.Add(this.delayControl);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lbxMovimientosPorPasos);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -327,8 +426,11 @@ namespace MT_Main {
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudCabezaFinal)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAcciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -346,15 +448,23 @@ namespace MT_Main {
         private System.Windows.Forms.ListView alfabetoEnCeldas;
         private System.Windows.Forms.Button btnEncenderMaquina;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radEliminarTodosElementos;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label lblSelectedItemList;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radEliminarElemento;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtAuxiliar;
+        private System.Windows.Forms.TextBox txtCaracterAuxiliar;
         private System.Windows.Forms.Button btnResetearPrograma;
-        private System.Windows.Forms.NumericUpDown nudCabezaFinal;
+        private System.Windows.Forms.Button btnAgregarAccion;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboMovimientos;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.DataGridView dgvAcciones;
+        private System.Windows.Forms.ListBox lbxMovimientosPorPasos;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cboAcciones;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chkNegacion;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtCaracterReemplazar;
+        private System.Windows.Forms.NumericUpDown delayControl;
     }
 }
