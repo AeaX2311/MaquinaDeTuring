@@ -55,18 +55,18 @@
         }
 
         public override string ToString() {
-            string descripcion = movimiento.ToString(); //MOVER_DERECHA_HASTA
+            string descripcion = movimiento.ToString();
 
-            if(movimiento == 0 || (int) movimiento == 1) {
+            if(movimiento == Movimientos.MOVER_DERECHA_HASTA || movimiento == Movimientos.MOVER_IZQUIERDA_HASTA) {
                 if(isNegacion)
                     descripcion += " NO encontrar";
                         
-                descripcion += " " + CaracterAccion;                
+                descripcion += " " + caracterMovimiento;                
             }
 
             descripcion += " | " + Accion.ToString();
 
-            if((int) Accion == 1)
+            if(Accion == Acciones.REEMPLAZAR_SIMBOLO)
                 descripcion += " " + caracterAccion;            
 
             return descripcion;

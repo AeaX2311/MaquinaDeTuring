@@ -11,8 +11,6 @@ namespace MT_Main {
     /// </summary>
     public partial class Main : Form {
 
-
-
         /// <summary>
         /// Iniciar componentes principales
         /// </summary>
@@ -23,13 +21,14 @@ namespace MT_Main {
         private char[] cadenaEntrada;
         private List<Operacion> operaciones = new List<Operacion>();
         private int delay = 100;
-        private List<char> caracteresRestringidos = new List<char> { '#', '*', ESPACIO_EN_BLANCO };
+        //private List<char> caracteresRestringidos = new List<char> { '#', '*', ESPACIO_EN_BLANCO };
 
         public Main() {
             InitializeComponent();
             cboMovimientos.DataSource = Enum.GetValues(typeof(Movimientos));
             cboAcciones.DataSource = Enum.GetValues(typeof(Acciones));
             clearMovs();
+            delayControl.Value = 850;
         }
 
         private void btnAgregarCaracterAlfabeto_Click(object sender, EventArgs e) {
@@ -51,10 +50,10 @@ namespace MT_Main {
                 return;
             }
 
-            if(caracteresRestringidos.Contains(caracterIngresado.ElementAt(0))) {
+            /*if(caracteresRestringidos.Contains(caracterIngresado.ElementAt(0))) {
                 MessageBox.Show("El caracter introducido es un caracter restringido <" + caracteresRestringidos[0] + " " + caracteresRestringidos[1] + " " + caracteresRestringidos[2] + ">.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
+            }*/
 
             agregarCaracterAlfabeto(caracterIngresado);
         }
@@ -76,12 +75,11 @@ namespace MT_Main {
             }
 
             cadenaEntrada = txtCadenaEntrada.Text.ToCharArray();
-            //no permitir modificar alfabeto
-            //guardar cadena, no modificarla
+            
             guardarCadenaEntradaEnCeldas();
             btnEncenderMaquina.Enabled = true;
-            btnAgregarCaracterAlfabeto.Enabled = false;
-            lblSelectedItemList.Text += " 0";
+            groupBox3.Enabled = groupBox2.Enabled = false;
+            lblSelectedItemList.Text = "Cabezal seleccionado: 0";
         }
 
         /// <summary>
@@ -120,16 +118,16 @@ namespace MT_Main {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void alfabetoEnCeldas_DrawItem(object sender, DrawListViewItemEventArgs e) {
+            SolidBrush colorNormalDeFondo = new SolidBrush(Color.FromArgb(238, 237, 247));
+            SolidBrush colorCuandoCabezalSeSelecciona = new SolidBrush(Color.FromArgb(143, 246, 250));
 
-            SolidBrush colorNormalDeFondo = new SolidBrush(Color.FromArgb(255, 90, 51));
-            SolidBrush colorCuandoCabezalSeSelecciona = new SolidBrush(Color.FromArgb(36, 255, 109));
             if(e.Item.Selected) {
                 e.Graphics.FillRectangle(colorCuandoCabezalSeSelecciona, e.Bounds);
             } else
                 e.Graphics.FillRectangle(colorNormalDeFondo, e.Bounds);
-            e.Graphics.DrawRectangle(Pens.Red, e.Bounds);
+            e.Graphics.DrawRectangle(Pens.Black, e.Bounds);
             TextRenderer.DrawText(e.Graphics, e.Item.Text, alfabetoEnCeldas.Font, e.Bounds,
-                                   SystemColors.HighlightText, Color.Empty,
+                                   SystemColors.ControlDarkDark, Color.Empty,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
@@ -173,11 +171,11 @@ namespace MT_Main {
                 alfabetoEnCeldas.Items.Clear();
                 operaciones.Clear();
                 dgvAcciones.Rows.Clear();
-                lbxMovimientosPorPasos.Items.Clear();
                 lblSelectedItemList.Text = "Cabezal seleccionado:";
                 alfabeto = "";
                 listBoxAlfabeto.Items.Clear();
-                btnGuardarCadenaEntrada.Enabled = btnAgregarCaracterAlfabeto.Enabled = true;
+                groupBox2.Enabled = groupBox3.Enabled = true;
+                txtCadenaEntrada.Text = "";
             }
         }
 
@@ -198,6 +196,8 @@ namespace MT_Main {
                 }
 
                 nuevaOperacion.CaracterMovimiento = txtCaracterAuxiliar.Text.ElementAt(0);
+
+                btnResetearMovimientos.Enabled = true;
             }
 
             if(nuevaOperacion.Accion == Acciones.REEMPLAZAR_SIMBOLO) {
@@ -226,13 +226,24 @@ namespace MT_Main {
         }
 
         private async void btnEncenderMaquina_Click(object sender, EventArgs e) {
+            if(operaciones.Count == 0) {
+                MessageBox.Show("No hay operaciones por realizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            delayControl.Enabled = groupBox3.Enabled = groupBox2.Enabled = groupBox4.Enabled = groupBox7.Enabled = false;
+
             delay = (int) delayControl.Value;
             bool seAceptaCadena = await ejecutar();
             if(seAceptaCadena) {
                 MessageBox.Show("Cadena aceptada.", "Exito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             } else {
                 MessageBox.Show("La cadena no fue aceptada.", "Ocurrio un error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            delayControl.Enabled = groupBox3.Enabled = groupBox2.Enabled = groupBox4.Enabled = groupBox7.Enabled = true;
+            dgvAcciones.Rows[operaciones.Count - 1].Selected = false;
         }
 
         private async Task<bool> ejecutar() {
@@ -240,14 +251,16 @@ namespace MT_Main {
             try {
                 cabezal = alfabetoEnCeldas.SelectedItems[0];
             } catch { //No deberia ocurrir nunca
-                MessageBox.Show("No se encontro una cadena con la cual interactuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se encontro una cadena con la cual interactuar o no se ha seleccionado un cabezal.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return await Task.FromResult(false);
             }
 
             int iterador = cabezal.Index;
             ListViewItem item = null;
 
+            int numOperacion = 0;
             foreach(Operacion operacion in operaciones) {
+                dgvAcciones.Rows[numOperacion++].Selected = true;
                 switch(operacion.Movimiento) {
                     case Movimientos.MOVER_DERECHA_HASTA:
                         iterador++;
@@ -260,10 +273,7 @@ namespace MT_Main {
                             if(operacion.IsNegacion ? cadenaEntrada[iterador] != operacion.CaracterMovimiento : cadenaEntrada[iterador] == operacion.CaracterMovimiento) { //Es el elemento que estoy buscando?
                                 try {
                                     alfabetoEnCeldas.Items[iterador].Selected = true;
-                                 //   alfabetoEnCeldas.Items[iterador + 1].Selected = true; //Cambio visual
-                                } catch {
-                                     //Cambio visual
-                                }
+                                } catch {}
                                 break;
                             }
 
@@ -299,10 +309,7 @@ namespace MT_Main {
                             if(operacion.IsNegacion ? cadenaEntrada[iterador] != operacion.CaracterMovimiento : cadenaEntrada[iterador] == operacion.CaracterMovimiento) { //Es el elemento que estoy buscando?
                                 try {
                                     alfabetoEnCeldas.Items[iterador].Selected = true;
-                                    //alfabetoEnCeldas.Items[iterador - 1].Selected = true; //Cambio visual
-                                } catch {
-                                     //Cambio visual
-                                }
+                                } catch {}
                                 break;
                             }
 
@@ -425,6 +432,22 @@ namespace MT_Main {
 
         private void button1_Click(object sender, EventArgs e) {
             MessageBox.Show("Si se elige la opcion MANTENERSE_EN_POSICION junto con REEMPLAZAR_SIMBOLO, se utilizara un * para dejar la marca.");
+        }
+
+        private void btnResetearMovimientos_Click(object sender, EventArgs e) {
+            operaciones.Clear();
+            dgvAcciones.Rows.Clear();
+            btnResetearMovimientos.Enabled = false;
+        }
+
+        private void listBoxAlfabeto_DrawItem(object sender, DrawItemEventArgs e) {
+            string sOoutput = listBoxAlfabeto.Items[e.Index].ToString();
+            float folength = e.Graphics.MeasureString(sOoutput, e.Font).Width;
+            float fpos = listBoxAlfabeto.Width - folength;
+            SolidBrush brushBack = new SolidBrush(e.BackColor);
+            e.Graphics.FillRectangle(brushBack, e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height);
+            SolidBrush brush = new SolidBrush(e.ForeColor);
+            e.Graphics.DrawString(sOoutput, e.Font, brush, fpos, e.Bounds.Top);
         }
     }
 }

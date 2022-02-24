@@ -28,7 +28,6 @@ namespace MT_Main {
             this.lblSelectedItemList = new System.Windows.Forms.Label();
             this.alfabetoEnCeldas = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnResetearPrograma = new System.Windows.Forms.Button();
             this.btnGuardarCadenaEntrada = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCadenaEntrada = new System.Windows.Forms.TextBox();
@@ -36,10 +35,12 @@ namespace MT_Main {
             this.label3 = new System.Windows.Forms.Label();
             this.txtCaracterAlfabeto = new System.Windows.Forms.TextBox();
             this.btnAgregarCaracterAlfabeto = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.delayControl = new System.Windows.Forms.NumericUpDown();
+            this.btnResetearPrograma = new System.Windows.Forms.Button();
             this.listBoxAlfabeto = new System.Windows.Forms.ListBox();
             this.btnEncenderMaquina = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtCaracterReemplazar = new System.Windows.Forms.TextBox();
             this.chkNegacion = new System.Windows.Forms.CheckBox();
@@ -55,17 +56,17 @@ namespace MT_Main {
             this.dgvAcciones = new System.Windows.Forms.DataGridView();
             this.Iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbxMovimientosPorPasos = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.delayControl = new System.Windows.Forms.NumericUpDown();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnResetearMovimientos = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAcciones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).BeginInit();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -76,7 +77,7 @@ namespace MT_Main {
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1309, 246);
+            this.groupBox1.Size = new System.Drawing.Size(1309, 228);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de entrada";
@@ -85,7 +86,7 @@ namespace MT_Main {
             // 
             this.lblSelectedItemList.AutoSize = true;
             this.lblSelectedItemList.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedItemList.Location = new System.Drawing.Point(6, 132);
+            this.lblSelectedItemList.Location = new System.Drawing.Point(309, 96);
             this.lblSelectedItemList.Name = "lblSelectedItemList";
             this.lblSelectedItemList.Size = new System.Drawing.Size(213, 20);
             this.lblSelectedItemList.TabIndex = 8;
@@ -95,11 +96,11 @@ namespace MT_Main {
             // 
             this.alfabetoEnCeldas.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.alfabetoEnCeldas.HideSelection = false;
-            this.alfabetoEnCeldas.Location = new System.Drawing.Point(6, 155);
+            this.alfabetoEnCeldas.Location = new System.Drawing.Point(6, 122);
             this.alfabetoEnCeldas.MultiSelect = false;
             this.alfabetoEnCeldas.Name = "alfabetoEnCeldas";
             this.alfabetoEnCeldas.OwnerDraw = true;
-            this.alfabetoEnCeldas.Size = new System.Drawing.Size(1297, 85);
+            this.alfabetoEnCeldas.Size = new System.Drawing.Size(1297, 86);
             this.alfabetoEnCeldas.TabIndex = 7;
             this.alfabetoEnCeldas.TileSize = new System.Drawing.Size(60, 60);
             this.alfabetoEnCeldas.UseCompatibleStateImageBehavior = false;
@@ -109,30 +110,19 @@ namespace MT_Main {
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnResetearPrograma);
             this.groupBox3.Controls.Add(this.btnGuardarCadenaEntrada);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtCadenaEntrada);
             this.groupBox3.Location = new System.Drawing.Point(285, 26);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1018, 90);
+            this.groupBox3.Size = new System.Drawing.Size(1018, 61);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cadena de entrada";
             // 
-            // btnResetearPrograma
-            // 
-            this.btnResetearPrograma.Location = new System.Drawing.Point(600, 56);
-            this.btnResetearPrograma.Name = "btnResetearPrograma";
-            this.btnResetearPrograma.Size = new System.Drawing.Size(250, 28);
-            this.btnResetearPrograma.TabIndex = 7;
-            this.btnResetearPrograma.Text = "Resetear";
-            this.btnResetearPrograma.UseVisualStyleBackColor = true;
-            this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
-            // 
             // btnGuardarCadenaEntrada
             // 
-            this.btnGuardarCadenaEntrada.Location = new System.Drawing.Point(856, 56);
+            this.btnGuardarCadenaEntrada.Location = new System.Drawing.Point(856, 23);
             this.btnGuardarCadenaEntrada.Name = "btnGuardarCadenaEntrada";
             this.btnGuardarCadenaEntrada.Size = new System.Drawing.Size(156, 28);
             this.btnGuardarCadenaEntrada.TabIndex = 6;
@@ -153,7 +143,7 @@ namespace MT_Main {
             // 
             this.txtCadenaEntrada.Location = new System.Drawing.Point(286, 23);
             this.txtCadenaEntrada.Name = "txtCadenaEntrada";
-            this.txtCadenaEntrada.Size = new System.Drawing.Size(726, 27);
+            this.txtCadenaEntrada.Size = new System.Drawing.Size(566, 27);
             this.txtCadenaEntrada.TabIndex = 4;
             this.txtCadenaEntrada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCadenaEntrada_KeyPress);
             // 
@@ -197,6 +187,54 @@ namespace MT_Main {
             this.btnAgregarCaracterAlfabeto.UseVisualStyleBackColor = true;
             this.btnAgregarCaracterAlfabeto.Click += new System.EventHandler(this.btnAgregarCaracterAlfabeto_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(663, 268);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(146, 20);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Retraso/Delay:";
+            // 
+            // delayControl
+            // 
+            this.delayControl.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.delayControl.Location = new System.Drawing.Point(815, 266);
+            this.delayControl.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.delayControl.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.delayControl.Name = "delayControl";
+            this.delayControl.Size = new System.Drawing.Size(85, 27);
+            this.delayControl.TabIndex = 10;
+            this.delayControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.delayControl.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // btnResetearPrograma
+            // 
+            this.btnResetearPrograma.Location = new System.Drawing.Point(211, 31);
+            this.btnResetearPrograma.Name = "btnResetearPrograma";
+            this.btnResetearPrograma.Size = new System.Drawing.Size(196, 28);
+            this.btnResetearPrograma.TabIndex = 7;
+            this.btnResetearPrograma.Text = "Resetear Maquina";
+            this.btnResetearPrograma.UseVisualStyleBackColor = true;
+            this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
+            // 
             // listBoxAlfabeto
             // 
             this.listBoxAlfabeto.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -205,23 +243,25 @@ namespace MT_Main {
             this.listBoxAlfabeto.Location = new System.Drawing.Point(34, 26);
             this.listBoxAlfabeto.Name = "listBoxAlfabeto";
             this.listBoxAlfabeto.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxAlfabeto.Size = new System.Drawing.Size(23, 384);
+            this.listBoxAlfabeto.Size = new System.Drawing.Size(23, 364);
             this.listBoxAlfabeto.TabIndex = 2;
+            this.listBoxAlfabeto.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxAlfabeto_DrawItem);
             // 
             // btnEncenderMaquina
             // 
+            this.btnEncenderMaquina.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnEncenderMaquina.Enabled = false;
-            this.btnEncenderMaquina.Location = new System.Drawing.Point(0, 262);
+            this.btnEncenderMaquina.ForeColor = System.Drawing.Color.Snow;
+            this.btnEncenderMaquina.Location = new System.Drawing.Point(1038, 246);
             this.btnEncenderMaquina.Name = "btnEncenderMaquina";
-            this.btnEncenderMaquina.Size = new System.Drawing.Size(331, 54);
+            this.btnEncenderMaquina.Size = new System.Drawing.Size(250, 65);
             this.btnEncenderMaquina.TabIndex = 3;
             this.btnEncenderMaquina.Text = "Encender maquina";
-            this.btnEncenderMaquina.UseVisualStyleBackColor = true;
+            this.btnEncenderMaquina.UseVisualStyleBackColor = false;
             this.btnEncenderMaquina.Click += new System.EventHandler(this.btnEncenderMaquina_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.txtCaracterReemplazar);
             this.groupBox4.Controls.Add(this.chkNegacion);
@@ -232,28 +272,17 @@ namespace MT_Main {
             this.groupBox4.Controls.Add(this.cboMovimientos);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.txtCaracterAuxiliar);
-            this.groupBox4.Controls.Add(this.btnEncenderMaquina);
-            this.groupBox4.Location = new System.Drawing.Point(121, 264);
+            this.groupBox4.Location = new System.Drawing.Point(112, 317);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(413, 333);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Procesos";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(355, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 27);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox4.Text = "Estados";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 133);
+            this.label7.Location = new System.Drawing.Point(159, 234);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(153, 20);
             this.label7.TabIndex = 18;
@@ -261,16 +290,16 @@ namespace MT_Main {
             // 
             // txtCaracterReemplazar
             // 
-            this.txtCaracterReemplazar.Location = new System.Drawing.Point(208, 130);
+            this.txtCaracterReemplazar.Location = new System.Drawing.Point(318, 231);
             this.txtCaracterReemplazar.MaxLength = 1;
             this.txtCaracterReemplazar.Name = "txtCaracterReemplazar";
-            this.txtCaracterReemplazar.Size = new System.Drawing.Size(129, 27);
+            this.txtCaracterReemplazar.Size = new System.Drawing.Size(89, 27);
             this.txtCaracterReemplazar.TabIndex = 17;
             // 
             // chkNegacion
             // 
             this.chkNegacion.AutoSize = true;
-            this.chkNegacion.Location = new System.Drawing.Point(26, 181);
+            this.chkNegacion.Location = new System.Drawing.Point(304, 130);
             this.chkNegacion.Name = "chkNegacion";
             this.chkNegacion.Size = new System.Drawing.Size(103, 24);
             this.chkNegacion.TabIndex = 16;
@@ -281,15 +310,15 @@ namespace MT_Main {
             // 
             this.cboAcciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAcciones.FormattingEnabled = true;
-            this.cboAcciones.Location = new System.Drawing.Point(96, 96);
+            this.cboAcciones.Location = new System.Drawing.Point(122, 178);
             this.cboAcciones.Name = "cboAcciones";
-            this.cboAcciones.Size = new System.Drawing.Size(311, 28);
+            this.cboAcciones.Size = new System.Drawing.Size(285, 28);
             this.cboAcciones.TabIndex = 15;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 96);
+            this.label6.Location = new System.Drawing.Point(48, 181);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 20);
             this.label6.TabIndex = 14;
@@ -297,9 +326,9 @@ namespace MT_Main {
             // 
             // btnAgregarAccion
             // 
-            this.btnAgregarAccion.Location = new System.Drawing.Point(0, 225);
+            this.btnAgregarAccion.Location = new System.Drawing.Point(6, 286);
             this.btnAgregarAccion.Name = "btnAgregarAccion";
-            this.btnAgregarAccion.Size = new System.Drawing.Size(331, 31);
+            this.btnAgregarAccion.Size = new System.Drawing.Size(401, 33);
             this.btnAgregarAccion.TabIndex = 13;
             this.btnAgregarAccion.Text = "Agregar";
             this.btnAgregarAccion.UseVisualStyleBackColor = true;
@@ -326,7 +355,7 @@ namespace MT_Main {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 63);
+            this.label2.Location = new System.Drawing.Point(116, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(196, 20);
             this.label2.TabIndex = 6;
@@ -334,19 +363,19 @@ namespace MT_Main {
             // 
             // txtCaracterAuxiliar
             // 
-            this.txtCaracterAuxiliar.Location = new System.Drawing.Point(208, 60);
+            this.txtCaracterAuxiliar.Location = new System.Drawing.Point(318, 77);
             this.txtCaracterAuxiliar.MaxLength = 1;
             this.txtCaracterAuxiliar.Name = "txtCaracterAuxiliar";
-            this.txtCaracterAuxiliar.Size = new System.Drawing.Size(129, 27);
+            this.txtCaracterAuxiliar.Size = new System.Drawing.Size(89, 27);
             this.txtCaracterAuxiliar.TabIndex = 5;
             this.txtCaracterAuxiliar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaracterAuxiliar_KeyPress);
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.listBoxAlfabeto);
-            this.groupBox5.Location = new System.Drawing.Point(12, 264);
+            this.groupBox5.Location = new System.Drawing.Point(12, 246);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(94, 416);
+            this.groupBox5.Size = new System.Drawing.Size(94, 404);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Alfabeto";
@@ -354,12 +383,12 @@ namespace MT_Main {
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.dgvAcciones);
-            this.groupBox6.Location = new System.Drawing.Point(562, 324);
+            this.groupBox6.Location = new System.Drawing.Point(540, 317);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(552, 234);
+            this.groupBox6.Size = new System.Drawing.Size(781, 333);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Acciones";
+            this.groupBox6.Text = "Movimientos por pasos";
             // 
             // dgvAcciones
             // 
@@ -372,79 +401,64 @@ namespace MT_Main {
             this.Iteracion,
             this.Descripcion});
             this.dgvAcciones.Location = new System.Drawing.Point(6, 26);
+            this.dgvAcciones.MultiSelect = false;
             this.dgvAcciones.Name = "dgvAcciones";
-            this.dgvAcciones.Size = new System.Drawing.Size(540, 202);
+            this.dgvAcciones.ReadOnly = true;
+            this.dgvAcciones.RowHeadersVisible = false;
+            this.dgvAcciones.Size = new System.Drawing.Size(769, 301);
             this.dgvAcciones.TabIndex = 0;
             // 
             // Iteracion
             // 
-            this.Iteracion.HeaderText = "Iteracion";
+            this.Iteracion.FillWeight = 40.60914F;
+            this.Iteracion.HeaderText = "Estados";
             this.Iteracion.Name = "Iteracion";
             this.Iteracion.ReadOnly = true;
+            this.Iteracion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Descripcion
             // 
+            this.Descripcion.FillWeight = 159.3909F;
             this.Descripcion.HeaderText = "Descripcion";
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
+            this.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // lbxMovimientosPorPasos
+            // groupBox7
             // 
-            this.lbxMovimientosPorPasos.FormattingEnabled = true;
-            this.lbxMovimientosPorPasos.ItemHeight = 20;
-            this.lbxMovimientosPorPasos.Location = new System.Drawing.Point(1153, 313);
-            this.lbxMovimientosPorPasos.Name = "lbxMovimientosPorPasos";
-            this.lbxMovimientosPorPasos.Size = new System.Drawing.Size(168, 364);
-            this.lbxMovimientosPorPasos.TabIndex = 7;
+            this.groupBox7.Controls.Add(this.btnResetearMovimientos);
+            this.groupBox7.Controls.Add(this.btnResetearPrograma);
+            this.groupBox7.Location = new System.Drawing.Point(112, 246);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(413, 65);
+            this.groupBox7.TabIndex = 8;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Acciones de reseteo";
             // 
-            // label4
+            // btnResetearMovimientos
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(558, 264);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(204, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Movimientos por pasos.";
-            // 
-            // delayControl
-            // 
-            this.delayControl.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.delayControl.Location = new System.Drawing.Point(488, 630);
-            this.delayControl.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.delayControl.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.delayControl.Name = "delayControl";
-            this.delayControl.Size = new System.Drawing.Size(120, 27);
-            this.delayControl.TabIndex = 10;
-            this.delayControl.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+            this.btnResetearMovimientos.Enabled = false;
+            this.btnResetearMovimientos.Location = new System.Drawing.Point(6, 31);
+            this.btnResetearMovimientos.Name = "btnResetearMovimientos";
+            this.btnResetearMovimientos.Size = new System.Drawing.Size(199, 28);
+            this.btnResetearMovimientos.TabIndex = 8;
+            this.btnResetearMovimientos.Text = "Resetear Estados";
+            this.btnResetearMovimientos.UseVisualStyleBackColor = true;
+            this.btnResetearMovimientos.Click += new System.EventHandler(this.btnResetearMovimientos_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 692);
+            this.ClientSize = new System.Drawing.Size(1333, 661);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.delayControl);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbxMovimientosPorPasos);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnEncenderMaquina);
             this.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
@@ -457,12 +471,13 @@ namespace MT_Main {
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAcciones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delayControl)).EndInit();
+            this.groupBox7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,15 +507,15 @@ namespace MT_Main {
         private System.Windows.Forms.ComboBox cboMovimientos;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.DataGridView dgvAcciones;
-        private System.Windows.Forms.ListBox lbxMovimientosPorPasos;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboAcciones;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkNegacion;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCaracterReemplazar;
         private System.Windows.Forms.NumericUpDown delayControl;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button btnResetearMovimientos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Iteracion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
     }
