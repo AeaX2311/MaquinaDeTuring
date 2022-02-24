@@ -39,6 +39,12 @@ namespace MT_Main {
             this.listBoxAlfabeto = new System.Windows.Forms.ListBox();
             this.btnEncenderMaquina = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCaracterReemplazar = new System.Windows.Forms.TextBox();
+            this.chkNegacion = new System.Windows.Forms.CheckBox();
+            this.cboAcciones = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnAgregarAccion = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cboMovimientos = new System.Windows.Forms.ComboBox();
@@ -46,14 +52,11 @@ namespace MT_Main {
             this.txtCaracterAuxiliar = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.dgvAcciones = new System.Windows.Forms.DataGridView();
+            this.Iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbxMovimientosPorPasos = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dgvAcciones = new System.Windows.Forms.DataGridView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cboAcciones = new System.Windows.Forms.ComboBox();
-            this.chkNegacion = new System.Windows.Forms.CheckBox();
-            this.txtCaracterReemplazar = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.delayControl = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,7 +85,7 @@ namespace MT_Main {
             // 
             this.lblSelectedItemList.AutoSize = true;
             this.lblSelectedItemList.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedItemList.Location = new System.Drawing.Point(1084, 132);
+            this.lblSelectedItemList.Location = new System.Drawing.Point(6, 132);
             this.lblSelectedItemList.Name = "lblSelectedItemList";
             this.lblSelectedItemList.Size = new System.Drawing.Size(213, 20);
             this.lblSelectedItemList.TabIndex = 8;
@@ -123,7 +126,7 @@ namespace MT_Main {
             this.btnResetearPrograma.Name = "btnResetearPrograma";
             this.btnResetearPrograma.Size = new System.Drawing.Size(250, 28);
             this.btnResetearPrograma.TabIndex = 7;
-            this.btnResetearPrograma.Text = "Resetear cadena";
+            this.btnResetearPrograma.Text = "Resetear";
             this.btnResetearPrograma.UseVisualStyleBackColor = true;
             this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
             // 
@@ -218,6 +221,7 @@ namespace MT_Main {
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.txtCaracterReemplazar);
             this.groupBox4.Controls.Add(this.chkNegacion);
@@ -231,10 +235,65 @@ namespace MT_Main {
             this.groupBox4.Controls.Add(this.btnEncenderMaquina);
             this.groupBox4.Location = new System.Drawing.Point(121, 264);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(343, 333);
+            this.groupBox4.Size = new System.Drawing.Size(413, 333);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Procesos";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(355, 165);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(27, 27);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "!";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(49, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(153, 20);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Reemplazalo por:";
+            // 
+            // txtCaracterReemplazar
+            // 
+            this.txtCaracterReemplazar.Location = new System.Drawing.Point(208, 130);
+            this.txtCaracterReemplazar.MaxLength = 1;
+            this.txtCaracterReemplazar.Name = "txtCaracterReemplazar";
+            this.txtCaracterReemplazar.Size = new System.Drawing.Size(129, 27);
+            this.txtCaracterReemplazar.TabIndex = 17;
+            // 
+            // chkNegacion
+            // 
+            this.chkNegacion.AutoSize = true;
+            this.chkNegacion.Location = new System.Drawing.Point(26, 181);
+            this.chkNegacion.Name = "chkNegacion";
+            this.chkNegacion.Size = new System.Drawing.Size(103, 24);
+            this.chkNegacion.TabIndex = 16;
+            this.chkNegacion.Text = "Negacion";
+            this.chkNegacion.UseVisualStyleBackColor = true;
+            // 
+            // cboAcciones
+            // 
+            this.cboAcciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAcciones.FormattingEnabled = true;
+            this.cboAcciones.Location = new System.Drawing.Point(96, 96);
+            this.cboAcciones.Name = "cboAcciones";
+            this.cboAcciones.Size = new System.Drawing.Size(311, 28);
+            this.cboAcciones.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 96);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 20);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Accion:";
             // 
             // btnAgregarAccion
             // 
@@ -261,7 +320,7 @@ namespace MT_Main {
             this.cboMovimientos.FormattingEnabled = true;
             this.cboMovimientos.Location = new System.Drawing.Point(122, 26);
             this.cboMovimientos.Name = "cboMovimientos";
-            this.cboMovimientos.Size = new System.Drawing.Size(215, 28);
+            this.cboMovimientos.Size = new System.Drawing.Size(285, 28);
             this.cboMovimientos.TabIndex = 11;
             // 
             // label2
@@ -280,6 +339,7 @@ namespace MT_Main {
             this.txtCaracterAuxiliar.Name = "txtCaracterAuxiliar";
             this.txtCaracterAuxiliar.Size = new System.Drawing.Size(129, 27);
             this.txtCaracterAuxiliar.TabIndex = 5;
+            this.txtCaracterAuxiliar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaracterAuxiliar_KeyPress);
             // 
             // groupBox5
             // 
@@ -294,83 +354,57 @@ namespace MT_Main {
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.dgvAcciones);
-            this.groupBox6.Location = new System.Drawing.Point(562, 414);
+            this.groupBox6.Location = new System.Drawing.Point(562, 324);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(343, 141);
+            this.groupBox6.Size = new System.Drawing.Size(552, 234);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Acciones";
+            // 
+            // dgvAcciones
+            // 
+            this.dgvAcciones.AllowUserToAddRows = false;
+            this.dgvAcciones.AllowUserToDeleteRows = false;
+            this.dgvAcciones.AllowUserToResizeRows = false;
+            this.dgvAcciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAcciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Iteracion,
+            this.Descripcion});
+            this.dgvAcciones.Location = new System.Drawing.Point(6, 26);
+            this.dgvAcciones.Name = "dgvAcciones";
+            this.dgvAcciones.Size = new System.Drawing.Size(540, 202);
+            this.dgvAcciones.TabIndex = 0;
+            // 
+            // Iteracion
+            // 
+            this.Iteracion.HeaderText = "Iteracion";
+            this.Iteracion.Name = "Iteracion";
+            this.Iteracion.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
             // 
             // lbxMovimientosPorPasos
             // 
             this.lbxMovimientosPorPasos.FormattingEnabled = true;
             this.lbxMovimientosPorPasos.ItemHeight = 20;
-            this.lbxMovimientosPorPasos.Location = new System.Drawing.Point(931, 313);
+            this.lbxMovimientosPorPasos.Location = new System.Drawing.Point(1153, 313);
             this.lbxMovimientosPorPasos.Name = "lbxMovimientosPorPasos";
-            this.lbxMovimientosPorPasos.Size = new System.Drawing.Size(390, 364);
+            this.lbxMovimientosPorPasos.Size = new System.Drawing.Size(168, 364);
             this.lbxMovimientosPorPasos.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(484, 281);
+            this.label4.Location = new System.Drawing.Point(558, 264);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(204, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "Movimientos por pasos.";
-            // 
-            // dgvAcciones
-            // 
-            this.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAcciones.Location = new System.Drawing.Point(0, 54);
-            this.dgvAcciones.Name = "dgvAcciones";
-            this.dgvAcciones.Size = new System.Drawing.Size(331, 129);
-            this.dgvAcciones.TabIndex = 0;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 96);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 20);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Accion:";
-            // 
-            // cboAcciones
-            // 
-            this.cboAcciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboAcciones.FormattingEnabled = true;
-            this.cboAcciones.Location = new System.Drawing.Point(96, 96);
-            this.cboAcciones.Name = "cboAcciones";
-            this.cboAcciones.Size = new System.Drawing.Size(241, 28);
-            this.cboAcciones.TabIndex = 15;
-            // 
-            // chkNegacion
-            // 
-            this.chkNegacion.AutoSize = true;
-            this.chkNegacion.Location = new System.Drawing.Point(26, 181);
-            this.chkNegacion.Name = "chkNegacion";
-            this.chkNegacion.Size = new System.Drawing.Size(103, 24);
-            this.chkNegacion.TabIndex = 16;
-            this.chkNegacion.Text = "Negacion";
-            this.chkNegacion.UseVisualStyleBackColor = true;
-            // 
-            // txtCaracterReemplazar
-            // 
-            this.txtCaracterReemplazar.Location = new System.Drawing.Point(208, 130);
-            this.txtCaracterReemplazar.MaxLength = 1;
-            this.txtCaracterReemplazar.Name = "txtCaracterReemplazar";
-            this.txtCaracterReemplazar.Size = new System.Drawing.Size(129, 27);
-            this.txtCaracterReemplazar.TabIndex = 17;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 133);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(153, 20);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Reemplazalo por:";
             // 
             // delayControl
             // 
@@ -466,5 +500,8 @@ namespace MT_Main {
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCaracterReemplazar;
         private System.Windows.Forms.NumericUpDown delayControl;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Iteracion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
     }
 }
