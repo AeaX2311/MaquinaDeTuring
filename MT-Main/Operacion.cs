@@ -18,7 +18,7 @@
             Movimiento = movimiento;
             Accion = accion;
         }
-
+    
         private Movimientos movimiento;
 
         public Movimientos Movimiento {

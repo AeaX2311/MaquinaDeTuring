@@ -122,12 +122,13 @@ namespace MT_Main {
             // 
             // btnGuardarCadenaEntrada
             // 
+            this.btnGuardarCadenaEntrada.BackColor = System.Drawing.Color.PowderBlue;
             this.btnGuardarCadenaEntrada.Location = new System.Drawing.Point(856, 23);
             this.btnGuardarCadenaEntrada.Name = "btnGuardarCadenaEntrada";
             this.btnGuardarCadenaEntrada.Size = new System.Drawing.Size(156, 28);
             this.btnGuardarCadenaEntrada.TabIndex = 6;
             this.btnGuardarCadenaEntrada.Text = "Guardar";
-            this.btnGuardarCadenaEntrada.UseVisualStyleBackColor = true;
+            this.btnGuardarCadenaEntrada.UseVisualStyleBackColor = false;
             this.btnGuardarCadenaEntrada.Click += new System.EventHandler(this.btnGuardarCadenaEntrada_Click);
             // 
             // label1
@@ -179,12 +180,13 @@ namespace MT_Main {
             // 
             // btnAgregarCaracterAlfabeto
             // 
+            this.btnAgregarCaracterAlfabeto.BackColor = System.Drawing.Color.PowderBlue;
             this.btnAgregarCaracterAlfabeto.Location = new System.Drawing.Point(6, 53);
             this.btnAgregarCaracterAlfabeto.Name = "btnAgregarCaracterAlfabeto";
             this.btnAgregarCaracterAlfabeto.Size = new System.Drawing.Size(261, 27);
             this.btnAgregarCaracterAlfabeto.TabIndex = 3;
             this.btnAgregarCaracterAlfabeto.Text = "Agregar al alfabeto";
-            this.btnAgregarCaracterAlfabeto.UseVisualStyleBackColor = true;
+            this.btnAgregarCaracterAlfabeto.UseVisualStyleBackColor = false;
             this.btnAgregarCaracterAlfabeto.Click += new System.EventHandler(this.btnAgregarCaracterAlfabeto_Click);
             // 
             // label8
@@ -199,6 +201,7 @@ namespace MT_Main {
             // 
             // delayControl
             // 
+            this.delayControl.BackColor = System.Drawing.Color.Azure;
             this.delayControl.Increment = new decimal(new int[] {
             100,
             0,
@@ -227,17 +230,19 @@ namespace MT_Main {
             // 
             // btnResetearPrograma
             // 
+            this.btnResetearPrograma.BackColor = System.Drawing.Color.Firebrick;
+            this.btnResetearPrograma.ForeColor = System.Drawing.Color.Snow;
             this.btnResetearPrograma.Location = new System.Drawing.Point(211, 31);
             this.btnResetearPrograma.Name = "btnResetearPrograma";
             this.btnResetearPrograma.Size = new System.Drawing.Size(196, 28);
             this.btnResetearPrograma.TabIndex = 7;
             this.btnResetearPrograma.Text = "Resetear Maquina";
-            this.btnResetearPrograma.UseVisualStyleBackColor = true;
+            this.btnResetearPrograma.UseVisualStyleBackColor = false;
             this.btnResetearPrograma.Click += new System.EventHandler(this.btnResetearPrograma_Click);
             // 
             // listBoxAlfabeto
             // 
-            this.listBoxAlfabeto.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listBoxAlfabeto.BackColor = System.Drawing.Color.White;
             this.listBoxAlfabeto.FormattingEnabled = true;
             this.listBoxAlfabeto.ItemHeight = 20;
             this.listBoxAlfabeto.Location = new System.Drawing.Point(34, 26);
@@ -326,12 +331,13 @@ namespace MT_Main {
             // 
             // btnAgregarAccion
             // 
+            this.btnAgregarAccion.BackColor = System.Drawing.Color.PowderBlue;
             this.btnAgregarAccion.Location = new System.Drawing.Point(6, 286);
             this.btnAgregarAccion.Name = "btnAgregarAccion";
             this.btnAgregarAccion.Size = new System.Drawing.Size(401, 33);
             this.btnAgregarAccion.TabIndex = 13;
             this.btnAgregarAccion.Text = "Agregar";
-            this.btnAgregarAccion.UseVisualStyleBackColor = true;
+            this.btnAgregarAccion.UseVisualStyleBackColor = false;
             this.btnAgregarAccion.Click += new System.EventHandler(this.btnAgregarAccion_Click);
             // 
             // label5
@@ -396,6 +402,7 @@ namespace MT_Main {
             this.dgvAcciones.AllowUserToDeleteRows = false;
             this.dgvAcciones.AllowUserToResizeRows = false;
             this.dgvAcciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAcciones.BackgroundColor = System.Drawing.Color.White;
             this.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAcciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Iteracion,
@@ -437,20 +444,23 @@ namespace MT_Main {
             // 
             // btnResetearMovimientos
             // 
+            this.btnResetearMovimientos.BackColor = System.Drawing.Color.DarkSalmon;
             this.btnResetearMovimientos.Enabled = false;
+            this.btnResetearMovimientos.ForeColor = System.Drawing.Color.Snow;
             this.btnResetearMovimientos.Location = new System.Drawing.Point(6, 31);
             this.btnResetearMovimientos.Name = "btnResetearMovimientos";
             this.btnResetearMovimientos.Size = new System.Drawing.Size(199, 28);
             this.btnResetearMovimientos.TabIndex = 8;
             this.btnResetearMovimientos.Text = "Resetear Estados";
-            this.btnResetearMovimientos.UseVisualStyleBackColor = true;
+            this.btnResetearMovimientos.UseVisualStyleBackColor = false;
             this.btnResetearMovimientos.Click += new System.EventHandler(this.btnResetearMovimientos_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 661);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1333, 664);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.delayControl);
             this.Controls.Add(this.groupBox7);

@@ -29,6 +29,8 @@ namespace MT_Main {
             cboAcciones.DataSource = Enum.GetValues(typeof(Acciones));
             clearMovs();
             delayControl.Value = 850;
+            dgvAcciones.DefaultCellStyle.SelectionBackColor = Color.FromArgb(143, 246, 250);
+            dgvAcciones.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
         private void btnAgregarCaracterAlfabeto_Click(object sender, EventArgs e) {
